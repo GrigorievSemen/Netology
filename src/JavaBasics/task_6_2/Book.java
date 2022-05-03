@@ -20,7 +20,7 @@ public class Book {
     }
 
 
-    public String changeRating(Book book) {
+    public String compareRating(Book book) {
         if (this.rating == book.rating) {
             return "Рейтинг книг одинаковый" + "\n";
         }

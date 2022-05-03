@@ -1,4 +1,4 @@
-package JavaBasics.task4_2;
+package JavaBasics.task_4_2;
 
 
 import java.util.Scanner;
