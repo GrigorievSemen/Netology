@@ -1,6 +1,5 @@
 package JavaBasics.task_8_1;
 
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -80,33 +79,23 @@ public class Main {
 
     /*выводим строковые значения с учетом возможного занимаемого места в столбце (ширины) и переносим если не влезает*/
     public static void printString(String str, int length) {
-        if (str.length() - 1 < length) { // если влезает целиком строка, то печатаем и на этом заканчиваем
-            System.out.print(str);
-            System.out.print(" ".repeat(length - str.length()));
-        } else { /* если не влезаем в ширину, делаем проверку каждого следущего слова на возможность "влезть",
-        если влезло то печатем его и проверям следующие с учетом оствшиегося места,
-        если нет то собираем новую строку из оставшихся слов и рекурсивно вызываем опять этот метод*/
             String arrStr[] = str.replaceAll(" +", " ").trim().split(" ");
             int remainingLength = 0;
-            while (true) {
+
                 for (int i = 0; i < arrStr.length - 1; i++) {
                     System.out.print(arrStr[i] + " ");
                     remainingLength += arrStr[i].length() + 1;
-                    if (length - remainingLength > arrStr[i + 1].length()) {
+                    if (length - remainingLength > arrStr[i + 1].length() + 2) {
                         continue;
                     } else {
                         System.out.println();
-                        StringBuilder sb = new StringBuilder();
-                        for (int j = i + 1; j < arrStr.length; j++) {
-                            sb.append(arrStr[j] + " ");
-                        }
-                        str = sb.toString();
+                        remainingLength = 0;
                     }
-                    break;
                 }
-                break;
-            }
-            printString(str, length);
+
+        remainingLength += arrStr[arrStr.length - 1].length();
+        System.out.print(arrStr[arrStr.length - 1]);
+        System.out.print(" ".repeat(length - remainingLength));
         }
     }
-}
+
