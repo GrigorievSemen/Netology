@@ -64,7 +64,7 @@ public class Main {
         while (num > 0) {
             for (int i = 0; i < SIZE; i++) {
                 for (int j = 0; j < SIZE; j++) {
-                    arr[SIZE - j - 1][i] = original[i][j];
+                    arr[i][j] = original[SIZE - 1 - j][i];
                 }
             }
             num--;
