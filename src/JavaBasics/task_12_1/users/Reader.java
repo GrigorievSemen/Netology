@@ -1,12 +1,8 @@
 package JavaBasics.task_12_1.users;
 
-import JavaBasics.task_12_1.Book;
-
 public interface Reader {
 
-    void takeBook(Book book);
+    void takeBook(Librarian librarian);
 
-    void returnBook(Book book);
-
-    String getName();
+    void returnBook(Librarian librarian);
 }

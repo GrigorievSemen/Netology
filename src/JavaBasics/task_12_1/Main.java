@@ -1,28 +1,23 @@
 package JavaBasics.task_12_1;
 
-import JavaBasics.task_12_1.users.*;
+import JavaBasics.task_12_1.persons.LibraryWorkers;
+import JavaBasics.task_12_1.persons.VisitsLibrary;
 
 public class Main {
     public static void main(String[] args) {
-        Book book = new Book("Example book");
-        User user = new User("");
-        Librarian librarian = user.getLibrary().getLibrarian();
-        Administrator administrator = user.getLibrary().getAdministrator();
-        Reader reader = new User("Коля");
-        Supplier supplier = new User("Гога");
 
-        reader.takeBook(book);
+        LibraryWorkers administrator = new LibraryWorkers("Женя", "Администратор");
+        LibraryWorkers library = new LibraryWorkers("Оля", "Библиотекарь");
+        VisitsLibrary reader = new VisitsLibrary("Петя", "Читатель");
+        VisitsLibrary supplier = new VisitsLibrary("Рома", "Поставщик");
 
-        librarian.orderBook(book, (User) supplier);
-
-        supplier.supplyBook(book);
-
-        librarian.setBookInLibrary(book);
-
-        reader.takeBook(book);
-
-        administrator.overdueNotification(book, (User) reader);
-
-        reader.returnBook(book);
+        administrator.findBook(reader);
+        library.findBook(supplier);
+        library.giveBook(supplier);
+        administrator.overdueNotification(supplier);
+        administrator.orderBook(supplier);
+        supplier.takeBook(administrator);
+        reader.returnBook(library);
+        supplier.supplyBook(library);
     }
 }

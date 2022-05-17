@@ -11,11 +11,26 @@ public class SavingsAccount extends AccountAbstract {
 
     @Override
     public void transfer(AccountAbstract account, int amount) {
-        if (this.balance > amount) {
+        if (!checkBalance(amount)) {
+            System.out.println("Недостаточно средств для перевода");
+            return;
+        }
+
+        if (account.getClass().getSimpleName().equals("CreditAccount")) {
+            CreditAccount creditAccount = (CreditAccount)account;
+
+            if (creditAccount.getBalance() != 0 && Math.abs(creditAccount.getBalance()) >= amount){
+                account.addMoney(amount);
+                balance -= amount;
+                return;
+            }else {
+                System.out.println("Перевод невозможен, сумма должна быть меньше или равна кредитному остатку");
+            }
+        }
+
+        if (!account.getClass().getSimpleName().equals("CreditAccount")){
             account.addMoney(amount);
             balance -= amount;
-        } else {
-            System.out.println("Недостаточно средств для перевода");
         }
     }
 
@@ -26,6 +41,10 @@ public class SavingsAccount extends AccountAbstract {
 
     @Override
     public String toString() {
-        return nameAccount + " - балланс = " + this.balance;
+        return nameAccount + " - баланс = " + this.balance;
+    }
+
+    private boolean checkBalance(int amount) {
+        return this.balance > amount;
     }
 }

@@ -1,15 +1,11 @@
 package JavaBasics.task_12_1.users;
-import JavaBasics.task_12_1.Book;
 
 public interface Administrator {
 
-    Book findBook(String nameBook);
+    void findBook(Reader reader);
 
-    void giveBook(Book book);
+    void giveBook(Reader reader);
 
-    String getName();
+    void overdueNotification(Reader reader);
 
-    default void overdueNotification(Book book, User user) {
-        System.out.println("Читателю <" + user.getName() + "> необходимо вернуть книгу - " + book.getNameBook());
-    }
 }
