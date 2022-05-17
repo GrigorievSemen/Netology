@@ -1,5 +1,4 @@
 package JavaBasics.task_11_2;
-
 import JavaBasics.task_11_2.taxType.IncomeTaxType;
 import JavaBasics.task_11_2.taxType.ProgressiveTaxType;
 import JavaBasics.task_11_2.taxType.VATaxType;
