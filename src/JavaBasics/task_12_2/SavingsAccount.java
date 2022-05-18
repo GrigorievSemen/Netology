@@ -16,10 +16,8 @@ public class SavingsAccount extends AccountAbstract {
             return;
         }
 
-        if (account.getClass().getSimpleName().equals("CreditAccount")) {
-            CreditAccount creditAccount = (CreditAccount)account;
-
-            if (creditAccount.getBalance() != 0 && Math.abs(creditAccount.getBalance()) >= amount){
+        if (account.getNameAccount().equals("Кредитный счет")) {
+            if (account.getBalance() != 0 && Math.abs(account.getBalance()) >= amount){
                 account.addMoney(amount);
                 balance -= amount;
                 return;
@@ -28,7 +26,7 @@ public class SavingsAccount extends AccountAbstract {
             }
         }
 
-        if (!account.getClass().getSimpleName().equals("CreditAccount")){
+        if (!account.getNameAccount().equals("Кредитный счет")){
             account.addMoney(amount);
             balance -= amount;
         }
@@ -37,6 +35,16 @@ public class SavingsAccount extends AccountAbstract {
     @Override
     public void addMoney(int amount) {
         this.balance += amount;
+    }
+
+    @Override
+    public int getBalance() {
+        return balance;
+    }
+
+    @Override
+    public String getNameAccount(){
+        return nameAccount;
     }
 
     @Override

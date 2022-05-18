@@ -19,8 +19,14 @@ public class CreditAccount extends AccountAbstract {
         this.balance += amount;
     }
 
+    @Override
     public int getBalance() {
         return balance;
+    }
+
+    @Override
+    public String getNameAccount(){
+        return nameAccount;
     }
 
     @Override
