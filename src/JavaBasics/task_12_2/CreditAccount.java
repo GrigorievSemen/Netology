@@ -5,28 +5,26 @@ public class CreditAccount extends AccountAbstract {
     private int balance = 0;
 
     @Override
-    public void pay(int amount) {
+    public Enum pay(int amount) {
         balance -= amount;
+        return Messages.SUCCESS_PAY;
     }
 
     @Override
-    public void transfer(AccountAbstract account, int amount) {
-        System.out.println("Для данного счета действие недоступно");
+    public Enum transfer(AccountAbstract account, int amount) {
+        return Messages.UNAVAILABLE;
     }
 
     @Override
-    public void addMoney(int amount) {
-        this.balance += amount;
-    }
-
-    @Override
-    public int getBalance() {
-        return balance;
-    }
-
-    @Override
-    public String getNameAccount(){
-        return nameAccount;
+    public Enum addMoney(int amount) {
+        if(balance == 0){
+            return Messages.REFILL_NO_REQUIRED;
+        } else if (-balance < amount){
+            return Messages.INCORRECT;
+        } else {
+            this.balance += amount;
+            return Messages.SUCCESS_REFILL;
+        }
     }
 
     @Override

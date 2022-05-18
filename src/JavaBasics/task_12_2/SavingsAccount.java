@@ -5,46 +5,26 @@ public class SavingsAccount extends AccountAbstract {
     private int balance = 1000;
 
     @Override
-    public void pay(int amount) {
-        System.out.println("Для данного счета действие недоступно");
+    public Enum pay(int amount) {
+        return Messages.UNAVAILABLE;
     }
 
     @Override
-    public void transfer(AccountAbstract account, int amount) {
+    public Enum transfer(AccountAbstract account, int amount) {
         if (!checkBalance(amount)) {
-            System.out.println("Недостаточно средств для перевода");
-            return;
+            return Messages.INSUFFICIENT_FUNDS;
         }
-
-        if (account.getNameAccount().equals("Кредитный счет")) {
-            if (account.getBalance() != 0 && Math.abs(account.getBalance()) >= amount){
-                account.addMoney(amount);
-                balance -= amount;
-                return;
-            }else {
-                System.out.println("Перевод невозможен, сумма должна быть меньше или равна кредитному остатку");
-            }
-        }
-
-        if (!account.getNameAccount().equals("Кредитный счет")){
-            account.addMoney(amount);
+        Messages check = (Messages) account.addMoney(amount);
+        if (check.equals(Messages.SUCCESS_REFILL)){
             balance -= amount;
         }
+        return check.equals(Messages.SUCCESS_REFILL) ? Messages.SUCCESS_TRANSFER : check;
     }
 
     @Override
-    public void addMoney(int amount) {
+    public Enum addMoney(int amount) {
         this.balance += amount;
-    }
-
-    @Override
-    public int getBalance() {
-        return balance;
-    }
-
-    @Override
-    public String getNameAccount(){
-        return nameAccount;
+        return Messages.SUCCESS_REFILL;
     }
 
     @Override
