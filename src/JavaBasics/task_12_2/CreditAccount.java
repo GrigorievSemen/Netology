@@ -5,21 +5,21 @@ public class CreditAccount extends AccountAbstract {
     private int balance = 0;
 
     @Override
-    public Enum pay(int amount) {
+    public Messages pay(int amount) {
         balance -= amount;
         return Messages.SUCCESS_PAY;
     }
 
     @Override
-    public Enum transfer(AccountAbstract account, int amount) {
+    public Messages transfer(AccountAbstract account, int amount) {
         return Messages.UNAVAILABLE;
     }
 
     @Override
-    public Enum addMoney(int amount) {
-        if(balance == 0){
+    public Messages addMoney(int amount) {
+        if (balance == 0) {
             return Messages.REFILL_NO_REQUIRED;
-        } else if (-balance < amount){
+        } else if (-balance < amount) {
             return Messages.INCORRECT;
         } else {
             this.balance += amount;

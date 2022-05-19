@@ -5,7 +5,7 @@ public class CheckingAccount extends AccountAbstract {
     private int balance = 1000;
 
     @Override
-    public Enum pay(int amount) {
+    public Messages pay(int amount) {
         if (!checkBalance(amount)) {
             return Messages.INSUFFICIENT_FUNDS;
         } else {
@@ -15,19 +15,19 @@ public class CheckingAccount extends AccountAbstract {
     }
 
     @Override
-    public Enum transfer(AccountAbstract account, int amount) {
+    public Messages transfer(AccountAbstract account, int amount) {
         if (!checkBalance(amount)) {
             return Messages.INSUFFICIENT_FUNDS;
         }
-            Messages check = (Messages) account.addMoney(amount);
-            if (check.equals(Messages.SUCCESS_REFILL)){
-                balance -= amount;
-            }
-        return check.equals(Messages.SUCCESS_REFILL) ? Messages.SUCCESS_TRANSFER : check;
+        Messages check = account.addMoney(amount);
+        if (check.equals(Messages.SUCCESS_REFILL)) {
+            balance -= amount;
         }
+        return check.equals(Messages.SUCCESS_REFILL) ? Messages.SUCCESS_TRANSFER : check;
+    }
 
     @Override
-    public Enum addMoney(int amount) {
+    public Messages addMoney(int amount) {
         this.balance += amount;
         return Messages.SUCCESS_REFILL;
     }

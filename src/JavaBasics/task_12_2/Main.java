@@ -6,42 +6,41 @@ public class Main {
     static AccountAbstract save = new SavingsAccount();
 
     public static void main(String[] args) throws InterruptedException {
-
         Messages action;
 
-        action = (Messages) credit.pay(100);
+        action = credit.pay(100);
         System.out.println(action);
         printAccounts();
 
-        action = (Messages) credit.transfer(save, 100);
+        action = credit.transfer(save, 100);
         System.out.println(action);
         printAccounts();
 
-        action = (Messages) credit.addMoney(110);
+        action = credit.addMoney(110);
         System.out.println(action);
         printAccounts();
 
-        action = (Messages) check.pay(100);
+        action = check.pay(100);
         System.out.println(action);
         printAccounts();
 
-        action = (Messages) check.transfer(credit,100);
+        action = check.transfer(credit, 100);
         System.out.println(action);
         printAccounts();
 
-        action = (Messages) check.addMoney(100);
+        action = check.addMoney(100);
         System.out.println(action);
         printAccounts();
 
-        action = (Messages) save.pay(100);
+        action = save.pay(100);
         System.out.println(action);
         printAccounts();
 
-        action = (Messages) save.transfer(check, 100);
+        action = save.transfer(check, 100);
         System.out.println(action);
         printAccounts();
 
-        action = (Messages) save.addMoney(100);
+        action = save.addMoney(100);
         System.out.println(action);
         printAccounts();
     }
