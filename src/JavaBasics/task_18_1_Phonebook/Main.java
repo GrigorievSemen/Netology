@@ -12,6 +12,7 @@ public class Main {
         phoneBook.createGroup("Work");
 
         phoneBook.addContactToGroup("Slava", "Parents"); //Такой группы не существует!
+        phoneBook.addContactToGroup("Dima", "Friends"); //Такого контакта нет в списке контактов
         phoneBook.addContactToGroup("Slava", "Friends"); //Контакт <Slava> успешно добавлен(a) в группу <Friends>
         phoneBook.addContactToGroup("Igor", "Friends"); //Контакт <Igor> успешно добавлен(a) в группу <Friends>
         phoneBook.addContactToGroup("Slava", "Work"); //Контакт <Slava> успешно добавлен(a) в группу <Work>

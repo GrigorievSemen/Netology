@@ -10,8 +10,9 @@ public class PhoneBook {
     private List<Contact> allContacts;
 
     public PhoneBook() {
-        this.map = new HashMap<>();
         this.allContacts = new ArrayList<>();
+        this.map = new HashMap<>();
+        map.put(null, allContacts);
     }
 
     public void createGroup(String group) {
@@ -22,12 +23,11 @@ public class PhoneBook {
         allContacts.add(new Contact(name, contact));
     }
 
-    public void addContactToGroup(String contact, String group) {
-        if (!isExistGroup(group)) {
+    public void addContactToGroup(String KeyContact, String group) {
+        if (isExistGroup(group)) {
         } else {
-            int i = isExistContact(contact, allContacts);
-            if (i >= 0) {
-                Contact con = allContacts.get(i);
+            Contact con = isExistContact(KeyContact, allContacts);
+            if (con != null) {
                 List<Contact> list = map.get(group);
                 list.add(con);
                 map.put(group, list);
@@ -39,59 +39,64 @@ public class PhoneBook {
     }
 
     public Contact searchContactIntoGroup(String contact, String group) {
-        if (!isExistGroup(group)) {
+        if (isExistGroup(group)) {
         } else {
             List<Contact> list = map.get(group);
-            int i = isExistContact(contact, list);
-            if (i >= 0) {
-                return list.get(i);
+            Contact con = isExistContact(contact, list);
+            if (con != null) {
+                return con;
             }
             System.out.printf("Контакта <%s> нет в группе <%s>\n", contact, group);
         }
-
         return new Contact("", "");
     }
 
     public Contact searchContactIntoContacts(String contact) {
-        int i = isExistContact(contact, allContacts);
-        if (i >= 0) {
-            return allContacts.get(i);
+        Contact con = isExistContact(contact, allContacts);
+        if (con != null) {
+            return con;
         }
         System.out.printf("Контакта <%s> нет в списке контактов\n", contact);
         return new Contact("", "");
     }
 
-
-    private int isExistContact(String key, List<Contact> contacts) {
+    private Contact isExistContact(String key, List<Contact> contacts) {
         Contact contact = null;
         for (int i = 0; i < contacts.size(); i++) {
             contact = contacts.get(i);
             if (contact.getName().equals(key) || contact.getNumberPhone().equals(key)) {
-                return i;
+                return contact;
             }
         }
-        return -1;
+        return null;
     }
 
     private boolean isExistGroup(String key) {
         if (!map.containsKey(key)) {
             System.out.println("Такой группы не существует!");
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("---------------------------------------------------------------------\n");
 
         for (Map.Entry<String, List<Contact>> param : map.entrySet()) {
-            sb.append("Group: ").append(param.getKey() + "\n").append("Contacts:\n");
+            if (param.getKey() != null) {
+                sb.append("Group: " + param.getKey() + "\n").append("Contacts:\n");
+            } else {
+                sb.append("All contacts:\n");
+            }
 
             List list = param.getValue();
             for (int i = 0; i < list.size(); i++) {
                 sb.append(i + 1 + ". ").append(list.get(i) + "\n");
             }
             sb.append("\n");
+            sb.append("---------------------------------------------------------------------\n");
         }
         return sb.toString();
     }
