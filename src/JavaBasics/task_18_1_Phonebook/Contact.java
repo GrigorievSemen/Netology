@@ -13,20 +13,12 @@ public class Contact {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getNumberPhone() {
         return numberPhone;
     }
 
-    public void setNumberPhone(String numberPhone) {
-        this.numberPhone = numberPhone;
-    }
-
     @Override
     public String toString() {
-        return !name.isEmpty() && !numberPhone.isEmpty() ? "Name - " + name + ": NumberPhone - " + numberPhone : "";
+        return  "Name - " + name + ": NumberPhone - " + numberPhone;
     }
 }

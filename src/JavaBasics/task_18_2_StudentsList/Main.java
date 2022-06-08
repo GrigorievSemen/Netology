@@ -1,7 +1,6 @@
 package JavaBasics.task_18_2_StudentsList;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -32,9 +31,8 @@ public class Main {
                 students.add(student);
             } else {
                 System.out.println("Список студентов:");
-                Iterator it = students.iterator();
-                while (it.hasNext()) {
-                    System.out.println(" - " + it.next());
+                for (Student student : students){
+                    System.out.println(" - " + student);
                 }
                 break;
             }
