@@ -1,5 +1,8 @@
 package JavaBasics.task_18_1_Phonebook;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         PhoneBook phoneBook = new PhoneBook();
@@ -10,22 +13,19 @@ public class Main {
         phoneBook.createGroup("Friends");
         phoneBook.createGroup("Work");
 
-        phoneBook.addContactToGroup(Slava, "Friends"); //Контакт <Slava> успешно добавлен в группу <Friends>
-        phoneBook.addContactToGroup(Igor, "Friends"); //Контакт <Igor> успешно добавлен в группу <Friends>
-        phoneBook.addContactToGroup(Slava, "Work"); //Контакт <Slava> успешно добавлен в группу <Work>
+        phoneBook.addContactToGroup(new ArrayList<>(List.of(Slava)), "Friends", "Work"); //Контакты успешно добавлены в группу <Friends> Контакты успешно добавлены в группу <Work>
 
-        System.out.println(phoneBook.searchContactIntoGroup(Igor, "Work"));// Контакта <Igor> нет в группе <Work>
-        System.out.println(phoneBook.searchContactIntoGroup(Igor, "Friends"));// Name - Igor: NumberPhone - 777-777-77-77
+        System.out.println(phoneBook.searchContactIntoGroup(Igor, "Work"));// Контакта <Igor> нет в группе <Work> null
+        System.out.println(phoneBook.searchContactIntoGroup(Slava, "Work"));// Name - Slava: NumberPhone - 999-999-99-99
 
         System.out.println(phoneBook.searchContactByNumberPhone("999-999-99-99")); //Name - Slava: NumberPhone - 999-999-99-99
-        System.out.println(phoneBook.searchContactByNumberPhone("444-444-44-44")); //Контакта <444-444-44-44> нет в списке контактов
+        System.out.println(phoneBook.searchContactByNumberPhone("444-444-44-44")); //Контакта <444-444-44-44> нет в списке контактов null
 
         System.out.println(phoneBook);
 //        ---------------------------------------------------------------------
 //        Group: Friends
 //        Contacts:
 //        1. Name - Slava: NumberPhone - 999-999-99-99
-//        2. Name - Igor: NumberPhone - 777-777-77-77
 //
 //        ---------------------------------------------------------------------
 //        Group: Work

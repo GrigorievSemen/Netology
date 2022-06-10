@@ -1,5 +1,6 @@
-package JavaBasics.task_18_1_Phonebook;
+package JavaBasics.task_19_1_Missed_calls;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,17 +8,11 @@ import java.util.Map;
 
 public class PhoneBook {
     private Map<String, List<Contact>> map;
+    private MissedCalls missedCalls;
 
     public PhoneBook() {
         this.map = new HashMap<>();
-    }
-
-    public void createGroup(String group) {
-        map.put(group, new ArrayList<>());
-    }
-
-    public Contact createContact(String name, String contact) {
-        return new Contact(name, contact);
+        this.missedCalls = new MissedCalls();
     }
 
     public static String getString(Map<String, List<Contact>> map) {
@@ -37,11 +32,37 @@ public class PhoneBook {
         return sb.toString();
     }
 
+    public void printMissCalls() {
+        missedCalls.print(this);
+    }
+
+    public void createMissCalls(String call) {
+        missedCalls.addMissCalls(LocalDateTime.now(), call);
+    }
+
+    public void createGroup(String group) {
+        map.put(group, new ArrayList<>());
+    }
+
+    public Contact createContact(String name, String contact) {
+        return new Contact(name, contact);
+    }
+
     public void addContactToGroup(List<Contact> contacts, String... groups) {
         for (String group : groups) {
             map.put(group, contacts);
             System.out.printf("Контакты успешно добавлены в группу <%s>\n", group);
         }
+    }
+
+    public Contact searchContactIntoGroup(Contact contact, String group) {
+        for (Contact con : map.get(group)) {
+            if (con.equals(contact)) {
+                return con;
+            }
+        }
+        System.out.printf("Контакта <%s> нет в группе <%s> ", contact.getName(), group);
+        return null;
     }
 
     public Contact searchContactByNumberPhone(String contact) {
@@ -52,17 +73,6 @@ public class PhoneBook {
                 }
             }
         }
-        System.out.printf("Контакта <%s> нет в списке контактов ", contact);
-        return null;
-    }
-
-    public Contact searchContactIntoGroup(Contact contact, String group) {
-        for (Contact con : map.get(group)) {
-            if (con.equals(contact)) {
-                return con;
-            }
-        }
-        System.out.printf("Контакта <%s> нет в группе <%s> ", contact.getName(), group);
         return null;
     }
 
