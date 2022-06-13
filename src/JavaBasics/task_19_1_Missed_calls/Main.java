@@ -1,8 +1,5 @@
 package JavaBasics.task_19_1_Missed_calls;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         PhoneBook phoneBook = new PhoneBook();
@@ -11,7 +8,8 @@ public class Main {
         Contact Igor = phoneBook.createContact("Igor", "777-777-77-77");
 
         phoneBook.createGroup("Friends");
-        phoneBook.addContactToGroup(new ArrayList<>(List.of(Slava, Igor)), "Friends");
+        phoneBook.addContactToGroup(Slava, new String[]{"Friends"});
+        phoneBook.addContactToGroup(Igor, new String[]{"Friends"});
 
         phoneBook.createMissCalls("777-777-77-77");
         Thread.sleep(1000);
